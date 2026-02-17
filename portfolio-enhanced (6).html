@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timothy - Roblox Developer Portfolio | 2018–Present</title>
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Timothy - Roblox Developer Portfolio">
+    <meta property="og:description" content="Game developer with 27M+ plays, partnered with Playverse. Specializing in incremental farm games.">
+    <meta property="og:type" content="website">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --color-bg: #000000;
+            --color-surface: #0f0f0f;
+            --color-surface-hover: #1a1a1a;
+            --color-border: rgba(255, 255, 255, 0.1);
+            --color-text: #ffffff;
+            --color-text-muted: #999999;
+            --color-primary: #ffffff;
+            --color-primary-glow: rgba(255, 255, 255, 0.3);
+            --color-success: #4ade80;
+            
+            --font-display: 'Syne', sans-serif;
+            --font-body: 'Manrope', sans-serif;
+            
+            --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
+        body {
+            font-family: var(--font-body);
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Animated Game Icons Background */
+        .game-icons-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            overflow: hidden; pointer-events: none;
+        }
+        .game-icon {
+            position: absolute; width: 120px; height: 120px; border-radius: 20px;
+            background-size: cover; background-position: center; opacity: 0;
+            animation: floatIcon 25s ease-in-out infinite;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        @keyframes floatIcon {
+            0% { transform: translate(0, 100vh) rotate(0deg) scale(0.8); opacity: 0; }
+            10% { opacity: 0.15; }
+            50% { opacity: 0.2; }
+            90% { opacity: 0.1; }
+            100% { transform: translate(var(--end-x), -150px) rotate(360deg) scale(1.2); opacity: 0; }
+        }
+        
+        .grain-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            opacity: 0.05; pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E");
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1.5rem 0;
+            background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--color-border);
+        }
+        .nav-container {
+            max-width: 1400px; margin: 0 auto; padding: 0 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .nav-logo {
+            font-family: var(--font-display); font-size: 1.5rem;
+            font-weight: 800; letter-spacing: -0.02em;
+        }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a {
+            color: var(--color-text-muted); text-decoration: none;
+            font-weight: 500; transition: var(--transition-smooth); font-size: 0.95rem;
+        }
+        .nav-links a:hover { color: var(--color-text); }
+        
+        /* Hero */
+        .hero {
+            min-height: 100vh; display: flex; align-items: center;
+            justify-content: center; text-align: center; padding: 8rem 2rem 4rem;
+        }
+        .hero-content { max-width: 900px; position: relative; z-index: 1; }
+        .hero-eyebrow {
+            font-size: 1rem; letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--color-text-muted); margin-bottom: 1.5rem; font-weight: 600;
+        }
+        .hero-title {
+            font-family: var(--font-display); font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1.5rem;
+            background: linear-gradient(180deg, #ffffff 0%, #999999 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            color: var(--color-text-muted); margin-bottom: 3rem; line-height: 1.6;
+        }
+        .hero-stats {
+            display: flex; justify-content: center; gap: 4rem;
+            margin-bottom: 3rem; flex-wrap: wrap;
+        }
+        .stat-value {
+            font-family: var(--font-display); font-size: 2.5rem;
+            font-weight: 800; margin-bottom: 0.5rem;
+        }
+        .stat-label {
+            font-size: 0.9rem; color: var(--color-text-muted);
+            text-transform: uppercase; letter-spacing: 0.1em;
+        }
+        .cta-buttons {
+            display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+        }
+        .btn-primary, .btn-secondary {
+            padding: 1rem 2.5rem; border-radius: 12px; font-weight: 600;
+            text-decoration: none; transition: var(--transition-smooth);
+            font-size: 1rem; border: none; cursor: pointer;
+            display: inline-flex; align-items: center; gap: 0.5rem;
+        }
+        .btn-primary { background: white; color: black; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2); }
+        .btn-secondary {
+            background: transparent; color: white; border: 2px solid var(--color-border);
+        }
+        .btn-secondary:hover {
+            border-color: white; background: rgba(255, 255, 255, 0.05);
+        }
+        
+        /* Sections */
+        .about-section, .projects-section { padding: 6rem 2rem; max-width: 1400px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-eyebrow {
+            font-size: 0.9rem; letter-spacing: 0.15em; text-transform: uppercase;
+            color: var(--color-text-muted); margin-bottom: 1rem; font-weight: 600;
+        }
+        .section-title {
+            font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800; letter-spacing: -0.02em; margin-bottom: 1rem;
+        }
+        .section-description {
+            font-size: 1.2rem; color: var(--color-text-muted);
+            max-width: 700px; margin: 0 auto;
+        }
+        
+        /* About Content */
+        .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+        .about-text { font-size: 1.1rem; line-height: 1.8; color: var(--color-text-muted); }
+        .about-text p { margin-bottom: 1.5rem; }
+        .about-text strong { color: var(--color-text); font-weight: 600; }
+        .about-highlights {
+            background: var(--color-surface); border: 1px solid var(--color-border);
+            border-radius: 20px; padding: 2.5rem;
+        }
+        .highlight-item { padding: 1.5rem 0; border-bottom: 1px solid var(--color-border); }
+        .highlight-item:last-child { border-bottom: none; }
+        .highlight-label {
+            font-size: 0.85rem; text-transform: uppercase;
+            letter-spacing: 0.1em; color: var(--color-text-muted); margin-bottom: 0.5rem;
+        }
+        .highlight-value {
+            font-family: var(--font-display); font-size: 1.3rem;
+            font-weight: 700; color: var(--color-text);
+        }
+        
+        /* Skills */
+        .skills-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem; margin-top: 3rem;
+        }
+        .skill-category {
+            background: var(--color-surface); border: 1px solid var(--color-border);
+            border-radius: 20px; padding: 2rem; transition: var(--transition-smooth);
+        }
+        .skill-category:hover { border-color: rgba(255, 255, 255, 0.3); transform: translateY(-4px); }
+        .skill-category-title {
+            font-family: var(--font-display); font-size: 1.3rem;
+            font-weight: 700; margin-bottom: 1.5rem;
+        }
+        .skill-item { margin-bottom: 1.5rem; }
+        .skill-name {
+            display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-weight: 500;
+        }
+        .skill-level { font-size: 0.9rem; color: var(--color-text-muted); }
+        .skill-bar {
+            height: 6px; background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px; overflow: hidden;
+        }
+        .skill-bar-fill {
+            height: 100%; background: linear-gradient(90deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4));
+            border-radius: 3px; transition: width 1s ease-out; width: 0;
+        }
+        
+        /* Projects */
+        .filters-container {
+            display: flex; gap: 1rem; justify-content: center;
+            margin-bottom: 3rem; flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 0.75rem 1.5rem; background: transparent;
+            border: 2px solid var(--color-border); border-radius: 100px;
+            color: var(--color-text-muted); font-weight: 600; cursor: pointer;
+            transition: var(--transition-smooth); font-size: 0.9rem;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            border-color: white; color: white; background: rgba(255, 255, 255, 0.05);
+        }
+        .search-box { max-width: 500px; margin: 0 auto 3rem; }
+        .search-box input {
+            width: 100%; padding: 1rem 1.5rem; background: var(--color-surface);
+            border: 2px solid var(--color-border); border-radius: 12px;
+            color: var(--color-text); font-size: 1rem; font-family: var(--font-body);
+            transition: var(--transition-smooth);
+        }
+        .search-box input:focus { outline: none; border-color: rgba(255, 255, 255, 0.3); }
+        
+        .projects-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 2rem;
+        }
+        .project-card {
+            background: var(--color-surface); border: 1px solid var(--color-border);
+            border-radius: 20px; overflow: hidden; cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+        .project-card:hover {
+            transform: translateY(-8px); border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+        .project-thumbnail { width: 100%; height: 220px; object-fit: cover; }
+        .project-card-content { padding: 1.5rem; }
+        .project-meta { display: flex; gap: 1rem; margin-bottom: 1rem; }
+        .project-year, .project-category {
+            font-size: 0.8rem; padding: 0.4rem 0.8rem;
+            background: rgba(255, 255, 255, 0.1); border-radius: 6px; font-weight: 600;
+        }
+        .project-card-title {
+            font-family: var(--font-display); font-size: 1.5rem;
+            font-weight: 700; margin-bottom: 0.5rem;
+        }
+        .project-card-tagline { color: var(--color-text-muted); font-size: 0.95rem; }
+        
+        .problem-solving {
+            margin-top: 1.5rem; padding: 1rem;
+            background: rgba(74, 222, 128, 0.1);
+            border-left: 3px solid var(--color-success); border-radius: 8px;
+        }
+        .problem-solving-label {
+            font-size: 0.75rem; text-transform: uppercase;
+            letter-spacing: 0.1em; color: var(--color-success);
+            font-weight: 700; margin-bottom: 0.5rem;
+        }
+        .problem-solving-text { font-size: 0.9rem; color: var(--color-text-muted); }
+        
+        /* Modal */
+        .modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(10px);
+            z-index: 2000; display: none; overflow-y: auto; padding: 2rem;
+        }
+        .modal.active { display: block; }
+        .modal-container { max-width: 1200px; margin: 2rem auto; position: relative; }
+        .modal-close {
+            position: fixed; top: 2rem; right: 2rem; width: 48px; height: 48px;
+            background: rgba(255, 255, 255, 0.1); border: 1px solid var(--color-border);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: var(--transition-smooth); z-index: 2001; color: white;
+            font-size: 1.5rem;
+        }
+        .modal-close:hover { background: rgba(255, 255, 255, 0.2); transform: rotate(90deg); }
+        .modal-content {
+            background: var(--color-bg); border: 1px solid var(--color-border);
+            border-radius: 24px; overflow: hidden;
+        }
+        .modal-banner {
+            width: 100%; height: 400px; object-fit: cover;
+        }
+        .modal-body { padding: 3rem; }
+        .modal-title {
+            font-family: var(--font-display); font-size: 3rem;
+            font-weight: 800; margin-bottom: 1rem;
+        }
+        .modal-tagline { font-size: 1.3rem; color: var(--color-text-muted); margin-bottom: 2rem; }
+        .modal-metrics {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem; padding: 2rem; background: var(--color-surface);
+            border-radius: 16px; margin-bottom: 3rem;
+        }
+        .metric-item { text-align: center; }
+        .metric-value {
+            font-family: var(--font-display); font-size: 2rem;
+            font-weight: 800; margin-bottom: 0.5rem;
+        }
+        .metric-label {
+            font-size: 0.85rem; color: var(--color-text-muted);
+            text-transform: uppercase; letter-spacing: 0.1em;
+        }
+        .modal-section { margin-bottom: 3rem; }
+        .modal-section h3 {
+            font-family: var(--font-display); font-size: 1.8rem;
+            font-weight: 700; margin-bottom: 1.5rem;
+        }
+        .modal-description {
+            font-size: 1.1rem; line-height: 1.8; color: var(--color-text-muted);
+        }
+        .videos-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem; margin-top: 1.5rem;
+        }
+        .video-container {
+            position: relative; padding-bottom: 56.25%; height: 0;
+            overflow: hidden; border-radius: 12px; background: var(--color-surface);
+        }
+        .video-container iframe {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        }
+        .play-button-large {
+            display: inline-flex; align-items: center; gap: 1rem;
+            padding: 1.5rem 3rem; background: white; color: black;
+            text-decoration: none; border-radius: 12px; font-weight: 700;
+            font-size: 1.1rem; transition: var(--transition-smooth); margin-top: 2rem;
+        }
+        .play-button-large:hover {
+            transform: translateY(-2px); box-shadow: 0 12px 32px rgba(255, 255, 255, 0.3);
+        }
+        .play-icon { width: 24px; height: 24px; }
+        
+        /* Footer */
+        footer {
+            padding: 3rem 2rem; text-align: center;
+            border-top: 1px solid var(--color-border);
+            color: var(--color-text-muted); font-size: 0.9rem;
+        }
+        .footer-updated { font-size: 0.8rem; opacity: 0.7; margin-top: 0.5rem; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-stats { gap: 2rem; }
+            .about-content { grid-template-columns: 1fr; gap: 2rem; }
+            .projects-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-icons-bg" id="gameIconsBg"></div>
+    <div class="grain-overlay"></div>
+    
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">Timothy</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-eyebrow">Roblox Developer • 2018–Present</div>
+            <h1 class="hero-title">Building Experiences for Millions</h1>
+            <p class="hero-subtitle">
+                Partnered developer creating engaging incremental games with complex progression systems
+            </p>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-value">22.9M+</div>
+                    <div class="stat-label">Total Plays</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">$185K+</div>
+                    <div class="stat-label">Total Earnings</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">7+ Years</div>
+                    <div class="stat-label">Experience</div>
+                </div>
+            </div>
+            
+            <div class="cta-buttons">
+                <a href="#projects" class="btn-primary">View Projects</a>
+                <a href="javascript:void(0)" id="downloadResume" class="btn-secondary">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                    Download Resume
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="about-section" id="about">
+        <div class="section-header">
+            <div class="section-eyebrow">About Me</div>
+            <h2 class="section-title">From Passion to Partnership</h2>
+            <p class="section-description">
+                Transforming a hobby into a professional game development career
+            </p>
+        </div>
+        
+        <div class="about-content">
+            <div class="about-text">
+                <p>
+                    I started creating Roblox games in <strong>2018</strong> as a way to bring my ideas to life. What began as experimenting with simple mechanics evolved into building complex game systems that millions of players enjoy.
+                </p>
+                <p>
+                    My breakthrough came with <strong>Hatch 1 Million Chickens</strong>, which exploded to <strong>10.1M visits</strong> and generated <strong>$100K in its first 3 months</strong>. This success caught the attention of <strong>Playverse Studios</strong>, leading to a professional partnership that transformed my approach to game development.
+                </p>
+                <p>
+                    At its peak, Hatch 1 Million Chickens reached <strong>#111 in Roblox earnings</strong>. According to Roblox's 2024 creator data, the top 100 creators averaged $6 million annually, while the top 1,000 averaged $820,000—up 570% since 2019. Being in that top tier validated years of learning and iteration.
+                </p>
+                <p>
+                    I'm currently developing <strong>Grow Your Chicken</strong>, combining incremental farm mechanics with tower defense elements. This project applies everything I've learned about player retention, progression systems, and monetization strategy.
+                </p>
+                <p>
+                    My games have been <strong>played worldwide</strong> across over 150 countries, with strong player communities in the United States, Vietnam, United Kingdom, Brazil, and beyond. Seeing players from every continent engage with my creations is incredibly rewarding and demonstrates the universal appeal of well-designed game mechanics.
+                </p>
+            </div>
+            
+            <div class="about-highlights">
+                <div class="highlight-item">
+                    <div class="highlight-label">Current Project</div>
+                    <div class="highlight-value">Grow Your Chicken</div>
+                </div>
+                <div class="highlight-item">
+                    <div class="highlight-label">Partnership</div>
+                    <div class="highlight-value">Playverse Studios</div>
+                </div>
+                <div class="highlight-item">
+                    <div class="highlight-label">Peak Earnings Rank</div>
+                    <div class="highlight-value">#111 on Roblox</div>
+                </div>
+                <div class="highlight-item">
+                    <div class="highlight-label">Total Players</div>
+                    <div class="highlight-value">22.9M+ Visits</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="projects-section" id="skills">
+        <div class="section-header">
+            <div class="section-eyebrow">Technical Expertise</div>
+            <h2 class="section-title">Skills & Technologies</h2>
+            <p class="section-description">
+                Connecting game development to computer science fundamentals
+            </p>
+        </div>
+        
+        <div class="skills-grid">
+            <div class="skill-category">
+                <div class="skill-category-title">Programming</div>
+                <div class="skill-item">
+                    <div class="skill-name"><span>Lua</span><span class="skill-level">Expert</span></div>
+                    <div class="skill-bar"><div class="skill-bar-fill" data-width="95"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name"><span>Data Structures</span><span class="skill-level">Advanced</span></div>
+                    <div class="skill-bar"><div class="skill-bar-fill" data-width="85"></div></div>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <div class="skill-category-title">Game Systems</div>
+                <div class="skill-item">
+                    <div class="skill-name"><span>Economy Design</span><span class="skill-level">Expert</span></div>
+                    <div class="skill-bar"><div class="skill-bar-fill" data-width="90"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name"><span>Tutorial Design</span><span class="skill-level">Advanced</span></div>
+                    <div class="skill-bar"><div class="skill-bar-fill" data-width="88"></div></div>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <div class="skill-category-title">Architecture</div>
+                <div class="skill-item">
+                    <div class="skill-name"><span>Client-Server</span><span class="skill-level">Advanced</span></div>
+                    <div class="skill-bar"><div class="skill-bar-fill" data-width="85"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name"><span>Data Persistence</span><span class="skill-level">Expert</span></div>
+                    <div class="skill-bar"><div class="skill-bar-fill" data-width="92"></div></div>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <div class="skill-category-title">Tools & Analytics</div>
+                <div class="skill-item">
+                    <div class="skill-name"><span>Roblox Studio</span><span class="skill-level">Expert</span></div>
+                    <div class="skill-bar"><div class="skill-bar-fill" data-width="95"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name"><span>Analytics</span><span class="skill-level">Advanced</span></div>
+                    <div class="skill-bar"><div class="skill-bar-fill" data-width="83"></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="projects-section" id="projects">
+        <div class="section-header">
+            <div class="section-eyebrow">Portfolio</div>
+            <h2 class="section-title">Featured Projects</h2>
+            <p class="section-description">
+                2 hit games, 22.9 million plays, $185K+ in revenue
+            </p>
+        </div>
+        
+        <div class="filters-container">
+            <button class="filter-btn active" data-filter="all">All Projects</button>
+            <button class="filter-btn" data-filter="Featured">Featured</button>
+        </div>
+        
+        <div class="projects-grid" id="projectsGrid"></div>
+    </section>
+    
+    <footer>
+        <div>© 2026 Timothy. All rights reserved.</div>
+        <div class="footer-updated">Last Updated: February 2026</div>
+    </footer>
+    
+    <!-- Project Modal -->
+    <div class="modal" id="projectModal">
+        <div class="modal-container">
+            <div class="modal-close" id="modalClose">×</div>
+            <div class="modal-content" id="modalContent">
+                <!-- Content dynamically inserted by JavaScript -->
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Game Icons Background - Using actual game thumbnails!
+        function createFloatingIcon() {
+            const container = document.getElementById('gameIconsBg');
+            const icon = document.createElement('div');
+            icon.className = 'game-icon';
+            
+            // Your actual game thumbnails
+            const gameImages = [
+                'Thumbnail3.png',  // Rainbow egg
+                'Thumbnail2_1.png', // Beige egg
+                'Thumbnail4_1.png', // Chicken with turret
+                'noFilter7-ezgif_com-webp-to-png-converter.png', // Farm scene
+                'Gemini_Generated_Image_r725bgr725bgr725.png', // Chicken crowd
+                'unwatermarked_Gemini_Generated_Image_xd8360xd8360xd83.png', // Revenue scene
+                'ABS2GSnAZ7wwYL-bRNyBVk6U0va-dHlT8uYH1LEcUwMbG7fSKkQyecEfPDEwoXhkNAb759KWH1RbGifHSm5vTDnbSqhsc5L366wLwckoatWfChyIS-QlVx9MYVec69j-rq9KGf0O9LzkfI2w1tzVlFno4ql9r_L_Hijke--J1XDsIzLsKFu7s1024-rj.png' // Avatar scene
+            ];
+            
+            const randomImage = gameImages[Math.floor(Math.random() * gameImages.length)];
+            icon.style.backgroundImage = `url('${randomImage}')`;
+            
+            const startX = Math.random() * window.innerWidth;
+            const endX = startX + (Math.random() - 0.5) * 400;
+            icon.style.left = startX + 'px';
+            icon.style.setProperty('--end-x', (endX - startX) + 'px');
+            
+            const duration = 15 + Math.random() * 10; // Faster: 15-25 seconds
+            icon.style.animationDuration = duration + 's';
+            icon.style.animationDelay = Math.random() * 3 + 's'; // Reduced delay
+            
+            container.appendChild(icon);
+            setTimeout(() => icon.remove(), (duration + 3) * 1000); // Updated for faster animation
+        }
+        
+        for (let i = 0; i < 15; i++) setTimeout(() => createFloatingIcon(), i * 1500); // Start faster
+        setInterval(createFloatingIcon, 2000); // Spawn more frequently
+        
+        // Skills Animation
+        function animateSkills() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const width = entry.target.getAttribute('data-width');
+                        entry.target.style.width = width + '%';
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            document.querySelectorAll('.skill-bar-fill').forEach(bar => observer.observe(bar));
+        }
+        
+        // Format USD currency
+        function formatUSD(amount) {
+            if (amount >= 1000) {
+                return '$' + (amount / 1000).toFixed(1) + 'K';
+            }
+            return '$' + amount.toLocaleString();
+        }
+        
+        // Projects Data with real game thumbnails
+        const projects = [
+            {
+                id: 1,
+                title: "Hatch 1 Million Chickens",
+                tagline: "10.1M+ visits viral collecting game",
+                year: "2025",
+                category: "Featured",
+                thumbnail: "Thumbnail3.png",
+                bannerUrl: "Thumbnail3.png",
+                achievement: "Generated $100K USD in first 3 months",
+                totalEarnings: 100000,
+                visits: 10100000,
+                favorites: 234567,
+                peakRank: 111,
+                description: "A viral collecting game where players hatch eggs to discover rare chicken variants. Features sophisticated gacha probability systems, trading mechanics, and visual collection displays.",
+                fullDescription: "Hatch 1 Million Chickens became my breakout hit, reaching 10.1M visits and generating $100K in just 3 months. The game features weighted probability systems for 100+ chicken variants, a secure trading system preventing exploits, and a visual pokedex-style collection interface. At its peak, the game ranked #111 on Roblox's earnings leaderboard, putting it in the elite tier of professional creators.",
+                highlights: [
+                    "Generated $100K revenue in first 3 months of launch",
+                    "Reached #111 on Roblox earnings leaderboard at peak",
+                    "10.1M+ visits from players worldwide",
+                    "Implemented weighted probability system for 100+ chicken variants",
+                    "Built secure trading system preventing duplication exploits",
+                    "Created visual collection interface with completion tracking",
+                    "Designed pity system ensuring fair rare drops"
+                ],
+                tech: ["Lua", "Random Number Generation", "Trading System", "ProfileStore", "UI Design", "Anti-Exploit"],
+                globalReach: "Played by users in over 150 countries, with strong player bases in the United States (29.3%), Vietnam (6.7%), and United Kingdom (6.3%)",
+                youtubeVideos: [
+                    "https://www.youtube.com/embed/C18omVhKYjM",
+                    "https://www.youtube.com/embed/L8KWtGr4urs",
+                    "https://www.youtube.com/embed/tTHHcGeR5QA"
+                ],
+                playUrl: "https://www.roblox.com/games/YourGameID1"
+            },
+            {
+                id: 2,
+                title: "Your Goblin Mine",
+                tagline: "12.8M+ visits mining incremental",
+                year: "2025",
+                category: "Featured",
+                thumbnail: "goblin-mine-thumbnail.png",
+                bannerUrl: "goblin-mine-thumbnail.png",
+                achievement: "My first smash hit game",
+                totalEarnings: 85000,
+                visits: 12800000,
+                favorites: 289456,
+                monthlyActiveUsers: 249067,
+                description: "An addictive mining incremental game where players dig deeper, upgrade their equipment, and unlock powerful abilities to maximize their mining empire.",
+                fullDescription: "Your Goblin Mine is an incremental mining game that became my first major hit with 12.8M visits and 249K monthly active users. Players manage their mining operation, strategically upgrading equipment and unlocking new depths. The game features offline earnings, prestige systems, and a carefully balanced economy across 50+ upgrade tiers. Its success validated my understanding of progression design and player retention mechanics.",
+                highlights: [
+                    "12.8M+ total visits with 249K monthly active users",
+                    "Generated $85K in total revenue",
+                    "Players worldwide with 29.3% from United States",
+                    "Balanced economy across 50+ upgrade tiers",
+                    "Offline earnings system for continuous progression",
+                    "Prestige mechanics with meaningful replayability",
+                    "Strategic upgrade paths requiring player optimization"
+                ],
+                tech: ["Lua", "Incremental Systems", "Economy Balancing", "Data Persistence", "Offline Calculations", "UI/UX"],
+                globalReach: "249K monthly active users playing worldwide, with strong engagement across North America, South America, Europe, and Asia",
+                youtubeVideos: [
+                    "https://www.youtube.com/embed/szh-XjKFSJs",
+                    "https://www.youtube.com/embed/oCHPul9SbzY",
+                    "https://www.youtube.com/embed/Hl6k1tYABCs"
+                ],
+                playUrl: "https://www.roblox.com/games/136409236554789/Your-Goblin-Mine"
+            }
+        ];
+        
+        function renderProjects() {
+            const grid = document.getElementById('projectsGrid');
+            grid.innerHTML = projects.map(p => `
+                <div class="project-card" onclick="openProjectModal(${p.id})" style="cursor: pointer;">
+                    <img src="${p.thumbnail}" alt="${p.title}" class="project-thumbnail">
+                    <div class="project-card-content">
+                        <div class="project-meta">
+                            <span class="project-year">${p.year}</span>
+                            <span class="project-category">${p.category}</span>
+                            ${p.totalEarnings ? `<span class="project-category" style="background: rgba(74, 222, 128, 0.2); color: var(--color-success);">${formatUSD(p.totalEarnings)} earned</span>` : ''}
+                        </div>
+                        <h3 class="project-card-title">${p.title}</h3>
+                        <p class="project-card-tagline">${p.tagline}</p>
+                        ${p.achievement ? `
+                            <div class="problem-solving">
+                                <div class="problem-solving-label">Key Achievement</div>
+                                <div class="problem-solving-text">${p.achievement}</div>
+                            </div>
+                        ` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Open Project Modal with full details
+        function openProjectModal(projectId) {
+            const project = projects.find(p => p.id === projectId);
+            if (!project) return;
+            
+            const modal = document.getElementById('projectModal');
+            const modalContent = document.getElementById('modalContent');
+            
+            // Format numbers
+            const formatNum = (num) => {
+                if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+                if (num >= 1000) return (num / 1000).toFixed(0) + 'K';
+                return num.toLocaleString();
+            };
+            
+            modalContent.innerHTML = `
+                <img src="${project.bannerUrl}" alt="${project.title}" class="modal-banner">
+                <div class="modal-body">
+                    <h2 class="modal-title">${project.title}</h2>
+                    <p class="modal-tagline">${project.tagline}</p>
+                    
+                    <div class="modal-metrics">
+                        <div class="metric-item">
+                            <div class="metric-value">${formatNum(project.visits)}</div>
+                            <div class="metric-label">Total Visits</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value">${formatUSD(project.totalEarnings)}</div>
+                            <div class="metric-label">Total Earnings</div>
+                        </div>
+                        ${project.monthlyActiveUsers ? `
+                            <div class="metric-item">
+                                <div class="metric-value">${formatNum(project.monthlyActiveUsers)}</div>
+                                <div class="metric-label">Monthly Active Users</div>
+                            </div>
+                        ` : ''}
+                        ${project.peakRank ? `
+                            <div class="metric-item">
+                                <div class="metric-value">#${project.peakRank}</div>
+                                <div class="metric-label">Peak Rank</div>
+                            </div>
+                        ` : ''}
+                    </div>
+                    
+                    ${project.youtubeVideos && project.youtubeVideos.length > 0 ? `
+                        <div class="modal-section">
+                            <h3>📺 Watch Gameplay</h3>
+                            <div class="videos-grid">
+                                ${project.youtubeVideos.map(videoUrl => `
+                                    <div class="video-container">
+                                        <iframe 
+                                            src="${videoUrl}" 
+                                            frameborder="0" 
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                            allowfullscreen>
+                                        </iframe>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    ` : ''}
+                    
+                    <div class="modal-section">
+                        <h3>About This Project</h3>
+                        <p class="modal-description">${project.fullDescription}</p>
+                    </div>
+                    
+                    ${project.globalReach ? `
+                        <div class="modal-section">
+                            <h3>🌍 Global Reach</h3>
+                            <p class="modal-description">${project.globalReach}</p>
+                        </div>
+                    ` : ''}
+                    
+                    <div class="modal-section">
+                        <h3>Key Highlights</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            ${project.highlights.map(h => `
+                                <li style="padding: 0.75rem 0; padding-left: 2rem; position: relative; color: var(--color-text-muted); border-bottom: 1px solid var(--color-border);">
+                                    <span style="position: absolute; left: 0; color: white; font-weight: bold;">→</span>
+                                    ${h}
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="modal-section">
+                        <h3>Technologies Used</h3>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+                            ${project.tech.map(t => `
+                                <span style="padding: 0.6rem 1.2rem; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--color-border); border-radius: 8px; font-size: 0.9rem; font-weight: 500;">${t}</span>
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+                    <a href="${project.playUrl}" target="_blank" class="play-button-large">
+                        <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                        Play Now on Roblox
+                    </a>
+                </div>
+            `;
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeProjectModal() {
+            const modal = document.getElementById('projectModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        document.getElementById('modalClose').addEventListener('click', closeProjectModal);
+        document.getElementById('projectModal').addEventListener('click', (e) => {
+            if (e.target.id === 'projectModal') closeProjectModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeProjectModal();
+        });
+        
+        document.getElementById('downloadResume').addEventListener('click', () => {
+            alert('Resume generation initiated!');
+        });
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProjects();
+            animateSkills();
+        });
+    </script>
+</body>
+</html>
