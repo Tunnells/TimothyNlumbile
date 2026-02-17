@@ -412,12 +412,174 @@
             transition: color 0.3s;
         }
 
-        /* ── Responsive ── */
+        /* ══════════════════════════════════════
+           MOBILE NAV — Hamburger
+        ══════════════════════════════════════ */
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 4px;
+            z-index: 1100;
+            background: none;
+            border: none;
+        }
+        .nav-hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--color-primary);
+            border-radius: 2px;
+            transition: var(--transition-smooth);
+        }
+        .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(6, 10, 6, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 1050;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2.5rem;
+        }
+        .mobile-menu.open { display: flex; }
+        .mobile-menu a {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            letter-spacing: -0.02em;
+        }
+        .mobile-menu a:hover { color: var(--color-primary); }
+
+        /* ══════════════════════════════════════
+           TABLET (≤ 1024px)
+        ══════════════════════════════════════ */
+        @media (max-width: 1024px) {
+            .about-content { grid-template-columns: 1fr; gap: 2.5rem; }
+            .skills-grid { grid-template-columns: repeat(2, 1fr); }
+            .modal-body { padding: 2rem; }
+            .modal-title { font-size: 2.2rem; }
+            .videos-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ══════════════════════════════════════
+           MOBILE (≤ 768px)
+        ══════════════════════════════════════ */
         @media (max-width: 768px) {
+            /* Nav */
             .nav-links { display: none; }
-            .hero-stats { gap: 2rem; }
+            .nav-hamburger { display: flex; }
+            .nav-container { padding: 0 1.25rem; }
+
+            /* Hero */
+            .hero { padding: 6rem 1.25rem 3rem; min-height: 100svh; }
+            .hero-eyebrow { font-size: 0.8rem; letter-spacing: 0.15em; }
+            .hero-stats {
+                gap: 0;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                background: var(--color-surface);
+                border: 1px solid var(--color-border);
+                border-radius: 16px;
+                padding: 1.25rem 0;
+                margin-bottom: 2rem;
+            }
+            .stat-item {
+                padding: 0.5rem 1rem;
+                border-right: 1px solid var(--color-border);
+            }
+            .stat-item:last-child { border-right: none; }
+            .stat-value { font-size: 1.6rem; }
+            .stat-label { font-size: 0.7rem; }
+
+            /* Buttons */
+            .cta-buttons { flex-direction: column; gap: 0.75rem; }
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                justify-content: center;
+                padding: 1rem 1.5rem;
+            }
+
+            /* Sections */
+            .about-section, .projects-section {
+                padding: 4rem 1.25rem;
+            }
+            .section-title { font-size: clamp(2rem, 8vw, 3rem); }
             .about-content { grid-template-columns: 1fr; gap: 2rem; }
-            .projects-grid { grid-template-columns: 1fr; }
+
+            /* Skills */
+            .skills-grid { grid-template-columns: 1fr; gap: 1rem; }
+
+            /* Projects */
+            .projects-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+            .filter-btn { padding: 0.6rem 1rem; font-size: 0.8rem; }
+
+            /* Modal — full screen on mobile */
+            .modal { padding: 0; }
+            .modal-container { margin: 0; width: 100%; min-height: 100%; }
+            .modal-content {
+                border-radius: 0;
+                min-height: 100vh;
+                min-height: 100svh;
+            }
+            .modal-banner { height: 220px; }
+            .modal-body { padding: 1.5rem; }
+            .modal-title { font-size: 1.8rem; }
+            .modal-tagline { font-size: 1rem; }
+            .modal-metrics {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+                padding: 1.25rem;
+            }
+            .metric-value { font-size: 1.5rem; }
+            .modal-close {
+                top: 1rem; right: 1rem;
+                width: 40px; height: 40px;
+                font-size: 1.2rem;
+            }
+            .modal-section h3 { font-size: 1.4rem; }
+            .play-button-large {
+                width: 100%;
+                justify-content: center;
+                padding: 1.1rem 1.5rem;
+            }
+
+            /* Floating icons — fewer on mobile */
+            .game-icon { width: 80px; height: 80px; }
+
+            /* About highlights */
+            .about-highlights { padding: 1.5rem; }
+            .highlight-value { font-size: 1.1rem; }
+        }
+
+        /* ══════════════════════════════════════
+           SMALL MOBILE (≤ 390px)
+        ══════════════════════════════════════ */
+        @media (max-width: 390px) {
+            .stat-value { font-size: 1.3rem; }
+            .stat-label { font-size: 0.65rem; }
+            .hero-title { font-size: 2.4rem; }
+            .modal-metrics { grid-template-columns: 1fr 1fr; }
+        }
+
+        /* Touch — disable 3D tilt on touch devices */
+        @media (hover: none) {
+            .project-card:active {
+                transform: scale(0.98) !important;
+                border-color: rgba(74, 222, 128, 0.4) !important;
+                box-shadow: 0 4px 20px rgba(74, 222, 128, 0.12) !important;
+                transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s !important;
+            }
         }
     </style>
 </head>
@@ -425,6 +587,14 @@
     <div class="game-icons-bg" id="gameIconsBg"></div>
     <div class="grain-overlay"></div>
     
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#about"    onclick="closeMobileMenu()">About</a>
+        <a href="#skills"   onclick="closeMobileMenu()">Skills</a>
+        <a href="#projects" onclick="closeMobileMenu()">Projects</a>
+        <a href="https://github.com/Tunnells" target="_blank" onclick="closeMobileMenu()" style="color: var(--color-primary); font-size: 1.5rem;">GitHub ↗</a>
+    </div>
+
     <nav>
         <div class="nav-container">
             <div class="nav-logo">Timothy</div>
@@ -433,6 +603,9 @@
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
             </ul>
+            <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
     
@@ -670,9 +843,12 @@
         }
 
         // ─────────────────────────────────────────────
-        // 3. 3D CARD TILT
+        // 3. 3D CARD TILT (desktop only)
         // ─────────────────────────────────────────────
         function initCardTilt() {
+            // Skip tilt on touch devices
+            if (window.matchMedia('(hover: none)').matches) return;
+
             document.addEventListener('mousemove', (e) => {
                 const cards = document.querySelectorAll('.project-card');
                 cards.forEach(card => {
@@ -1008,6 +1184,23 @@
         });
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeModal();
+        });
+
+        // ─────────────────────────────────────────────
+        // HAMBURGER MENU
+        // ─────────────────────────────────────────────
+        function closeMobileMenu() {
+            document.getElementById('mobileMenu').classList.remove('open');
+            document.getElementById('hamburger').classList.remove('open');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.getElementById('hamburger').addEventListener('click', () => {
+            const menu = document.getElementById('mobileMenu');
+            const burger = document.getElementById('hamburger');
+            const isOpen = menu.classList.toggle('open');
+            burger.classList.toggle('open', isOpen);
+            document.body.style.overflow = isOpen ? 'hidden' : 'auto';
         });
 
         // ─────────────────────────────────────────────
